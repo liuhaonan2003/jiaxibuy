@@ -11,9 +11,9 @@
 return array(
 	'DB_TYPE'=>'mysql',
 	'DB_HOST'=>'localhost',
-	'DB_NAME'=>'zend',
-	'DB_USER'=>'adminBS2PpxF',
-	'DB_PWD'=>'f2gAIA244j3M',
+	'DB_NAME'=>'hehong_v1',
+	'DB_USER'=>'root',
+	'DB_PWD'=>'',
 	'DB_PORT'=>'3306',
 	'DB_PREFIX'=>'iic_',
 );
