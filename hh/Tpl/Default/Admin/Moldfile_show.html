@@ -1,0 +1,198 @@
+<link rel="stylesheet" type="text/css" href="./Public/Css/style.css" />
+<script language="JavaScript">
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+function set_data(){	
+	var skl=$("#skl").val();
+	var mql=$("#mql").val();
+	var sum=parseFloat(skl)+parseFloat(mql);
+	$("#m_plastic").val(sum);
+}
+</script>
+<script type="text/javascript" src="./Public/Js/jquery.min.js"></script>
+<script type="text/javascript" src="./Public/Js/swfupload.js"></script>
+<script type="text/javascript">
+function issn(input_sn,mfid,mrid){
+	var sn=$(input_sn).val();
+	var url="{:U($module_name.'/issn')}";
+	 $.ajax({
+	 	type: "POST",
+		url:url,
+        data: {sn:sn,mfid:mfid,mrid:mrid},
+        dataType: "json",
+        success:function(data){
+        	if(data.status==1){
+        		$("#m_sn_msg").text(data.msg);
+        	}else{
+        		$("#m_sn_msg").text(data.msg);
+        	}
+        }
+	});
+}
+</script>
+<fieldset>
+<form  id="myform" name="myform" action="{:U($module_name.'/show?do='.$do)}" method="post">
+    <table class="table_form"  cellspacing='1' cellpadding='3' width="100%">
+    	<tr>
+    		<td width="400">
+    			<table>
+    				<tr>
+    					<td width="120" align="right">模具编号:</td>
+						<td colspan="3"><input type="text" class="input-text"  name="m_sn" value="{$vo['m_sn']}"  id="m_sn" onblur="javascript:issn(this,{$vo['id']?$vo['id']:0},{$moldregister['id']?$moldregister['id']:0});"/><a id="m_sn_msg"></a></td>
+    				</tr>
+    				<tr>
+    					<td width="120" align="right">厂商模具编号:</td>
+						<td colspan="3"><input type="text" class="input-text"  name="mfsn" value="{$vo['mfsn']}" /></td>
+    				</tr>
+    				<tr>
+    					<td width="120" align="right">模具名称:</td>
+						<td><input type="text" class="input-text"  name="m_title" value="{$vo['m_title']}" /></td>
+						<td width="120" align="right">开模时间:</td>
+						<td><input type="text" value="<php>if(!empty($vo['mc_time'])&&$vo['mc_time']>0){</php>{$vo['mc_time']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="mc_time" name="mc_time" class="Wdate input-text  "></td>
+    				</tr>
+    				<tr>
+    					<td width="120" align="right">模具类型:</td>
+						<td>
+							<select id="mt_id" name="mt_id">
+								<option value="0">请选择类型...</option>
+								<volist name="moldtype" id="vom" key="k">
+									<option value="{$vom['id']}" <if condition="$vo['mt_id'] ==$vom['id']">selected="selected"</if>>{$vom['title']}</option>
+								</volist>
+							</select>
+						</td>
+						<td width="120" align="right">模具类别:</td>
+						<td>
+							<select id="mc_id" name="mc_id">
+								<option value="0">请选择类别...</option>
+								<volist name="moldcategory" id="vom" key="k">
+									<option value="{$vom['id']}" <if condition="$vo['mc_id'] ==$vom['id']">selected="selected"</if>>{$vom['title']}</option>
+								</volist>
+							</select>
+						</td>
+    				</tr>
+    				<tr>
+						<td width="120" align="right">厂商名称:</td>
+						<td>
+							<select id="mf_id" name="mf_id">
+								<option value="0">请选择厂商...</option>
+								<volist name="moldfactory" id="vom" key="k">
+									<option value="{$vom['id']}" <if condition="$vo['mf_id'] ==$vom['id']">selected="selected"</if>>{$vom['title']}({$vom['sn']})</option>
+								</volist>
+							</select>
+						</td>
+						<td width="120" align="right">归属简称:</td>
+						<td>
+							<select id="mv_id" name="mv_id">
+								<option value="0">请选择归属...</option>
+								<volist name="moldvesting" id="vom" key="k">
+									<option value="{$vom['id']}" <if condition="$vo['mv_id'] ==$vom['id']">selected="selected"</if>>{$vom['title']}</option>
+								</volist>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td width="120" align="right">模具价格:</td>
+						<td colspan="3"><input type="text" class="input-text"  name="m_price" value="{$vo['m_price']}" /></td>
+					</tr>
+					<tr>
+						<td width="120" align="right">模具穴数:</td>
+						<td colspan="3"><input type="text" class="input-text"  name="mc_number" value="{$vo['mc_number']}" /></td>
+					</tr>
+					<tr>
+						<td width="120" align="right">线径OD:</td>
+						<td colspan="3"><input type="text" class="input-text"  name="m_od" value="{$vo['m_od']}" /></td>
+					</tr>
+					<tr>
+						<td width="120" align="right">设计使用次数:</td>
+						<td colspan="3"><input type="text" class="input-text"  name="mu_total" value="{$vo['mu_total']}" style="width:60px;"/>
+							已使用次数:<input type="text" class="input-text"  name="mc_total" value="{$vo['mc_total']}" style="width:60px;"/>
+							剩余次数:<input type="text" class="input-text"  name="mr_number" value="{$vo['mr_number']}" style="width:60px;"/>
+						</td>
+					</tr>
+					<tr>
+						<td width="120" align="right">每穴均重:</td>
+						<td colspan="3"><input type="text" class="input-text"  name="m_plastic" id="m_plastic" value="{$vo['m_plastic']}" style="width:60px;" onblur="javascript:set_data();"/>单穴水口料重:<input type="text" class="input-text"  name="skl" id="skl" value="{$vo['skl']}"  style="width:60px;" onblur="javascript:set_data();"/>单穴模腔料重:<input type="text" class="input-text"  name="mql" id="mql" value="{$vo['mql']}"  style="width:60px;" onblur="javascript:set_data();"/></td>
+					</tr>
+					<tr>
+						<td width="120" align="right">存放位置:</td>
+						<td>
+							<!--<input type="text" class="input-text"  name="ms_location" value="{$vo['ms_location']}" />-->
+							<textarea id="ms_location"  name="ms_location"  style="width:95%; height:30px">{$vo['ms_location']}</textarea>
+						</td>
+						<td width="120" align="right">目前位置:</td>
+						<td>
+							<!--<input type="text" class="input-text"  name="mc_position" value="{$vo['mc_position']}" />-->
+							<textarea id="mc_position"  name="mc_position"  style="width:95%; height:30px">{$vo['mc_position']}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td width="120" align="right">详细信息:</td>
+						<td colspan="3"><textarea id="remark"  name="remark"  style="width:95%; height:30px">{$vo['remark']}</textarea></td>
+					</tr>
+					
+    			</table>
+    		</td>
+    		<td width="200">
+    			<table>
+    				<tr>
+						<td width="120" align="right">模具照片:</td>
+						<td>
+							<!--<input type="text" class="input-text"  name="m_picture" value="{$vo['m_picture']}" />-->
+							<div id="m_picture_box" class="thumb_box">
+							<div id="m_picture_aid_box"></div>
+							<a href="javascript:swfupload('m_picture_uploadfile','m_picture','文件上传',1,1,1,'jpeg,jpg,png,gif',3,2,yesdo,nodo)">
+							<if condition="!empty($vo['m_picture'])"><img id="m_picture_pic" src="{$vo['m_picture']}"><else /><img id="m_picture_pic" src="/Public/Images/admin_upload_thumb.png"></if>
+							</a>
+							<br>
+							<input class="button" type="button" onclick="javascript:clean_thumb('m_picture');" value="取消缩略图">
+							<input id="m_picture" type="hidden" value="{$vo['m_picture']}" name="m_picture">
+							<if condition="!empty($vo['m_picture'])"><a href="{$vo['m_picture']}" target="_blank">图片下载</a></if>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="120" align="right">模具图纸:</td>
+						<td>
+							<!--<input type="text" class="input-text"  name="m_drawing" value="{$vo['m_drawing']}" />-->
+							<div id="m_drawing_box" class="thumb_box">
+							<div id="m_drawing_aid_box"></div>
+							<a href="javascript:swfupload('m_drawing_uploadfile','m_drawing','文件上传',1,1,1,'jpeg,jpg,png,gif,rar,dwg',3,2,yesdo,nodo)">
+							<if condition="!empty($vo['m_drawing'])"><php>$ret = strpos($vo['m_drawing'],'.rar');if( $ret==true){</php><img id="m_drawing_pic" style="height:32px;width:32px;" src="/Public/Images/ext/rar.png"><php>}else{</php><img id="m_drawing_pic" src="{$vo['m_drawing']}"><php>}</php><else /><img id="m_drawing_pic" src="/Public/Images/admin_upload_thumb.png"></if>
+							</a>
+							<br>
+							<input class="button" type="button" onclick="javascript:clean_thumb('m_drawing');" value="取消缩略图">
+							<input id="m_drawing" type="hidden" value="{$vo['m_drawing']}" name="m_drawing">
+							<if condition="!empty($vo['m_drawing'])"><a href="{$vo['m_drawing']}" target="_blank">图纸下载</a></if>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="120" align="right">模具状态:</td>
+						<td>
+							<!--<input type="radio" name="m_status" value="2" <php>if($vo['m_status']==2){</php>checked<php>}</php>/>是
+							<input type="radio" name="m_status" value="1" <php>if($vo['m_status']==1){</php>checked<php>}</php>/>否-->
+							<select id="m_status" name="m_status">
+								<volist name="arr_status" id="vom" key="k">
+									<option value="{$k}" <if condition="$vo['m_status'] ==$k">selected="selected"</if>>{$vom}</option>
+								</volist>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td width="120" align="right">报废时间:</td>
+						<td><input type="text" value="<php>if(!empty($vo['ms_time'])&&$vo['ms_time']>0){</php>{$vo['ms_time']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="ms_time" name="ms_time" class="Wdate input-text  "></td>			
+					</tr>
+					<tr>
+						<td width="120" align="right">报废原因:</td>
+						<td><textarea id="ms_remark"  name="ms_remark"  style="width:95%; height:30px">{$vo['ms_remark']}</textarea></td>
+					</tr>
+    			</table>
+    		</td>
+    	</tr>
+    </table>
+    <input type="hidden" name="mrid" value="{$moldregister['id']}" />
+    <input type="hidden" name="id" value="{$vo['id']}">
+    <input name="dosubmit" type="submit" value="1" class="hidden" id="dosubmit">
+  </form>
+</fieldset>

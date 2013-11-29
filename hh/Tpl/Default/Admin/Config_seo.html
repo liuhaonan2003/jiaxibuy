@@ -1,0 +1,21 @@
+<include file="Admin:header" />
+<form method='post'  id="form1" action="{:U('Config/dosite')}">
+<table cellpadding=0 cellspacing=0 width="100%" class="table_form" >
+
+<tr>
+	<th style="width:140px;">{:L('seo_title')}:</th>
+	<td><input type="text" class="input-text"  name="seo_title" value="{$seo_title}" size="50"></td>
+</tr><tr>
+	<th>{:L('seo_keywords')}:</th>
+	<td><input type="text"  class="input-text"  name="seo_keywords" value="{$seo_keywords}" size="50"></td>
+</tr><tr>
+	<th>{:L('seo_description')}:</th>
+	<td><textarea id="" rows="7" cols="60"   name="seo_description">{$seo_description}</textarea></td>
+</tr>
+</table>
+<div class="btn">{__TOKEN__}
+<INPUT TYPE="submit"  value="{:L('save')}" class="button" >
+<input TYPE="reset"  value="{:L('reset')}" class="button">
+</div>
+</form>
+</div>

@@ -1,0 +1,110 @@
+<include file="Admin:header" />
+<form id="myform" action="<if condition="$action_name=='add'">{:U($module_name.'/insert')}<else />{:U($module_name.'/update')}</if>" method="post">
+      	<table cellpadding=0 cellspacing=0 class="table_form" width="100%"> 
+      		<tr>
+      			<td>
+      				<table>
+      					<tr>
+						<td width="120">维修部门</td>
+						<td>
+							<select id="department" name="department">
+								<option value="0">请选择部门...</option>
+								<volist name="moldvesting" id="vom" key="k">
+									<option value="{$vom['id']}" <if condition="$vo['department'] ==$vom['id']">selected="selected"</if>>{$vom['title']}</option>
+								</volist>
+							</select>
+						</td>
+						</tr>
+						<tr>
+						<td width="120">模具编号</td>
+						<td>
+							<select id="mf_id" name="mf_id">
+								<option value="0">请选择模具...</option>
+								<volist name="moldfile" id="vom" key="k">
+									<option value="{$vom['id']}" <if condition="$vo['mf_id'] ==$vom['id']">selected="selected"</if>>{$vom['m_sn']}</option>
+								</volist>
+							</select>
+						</td>
+						</tr>		
+						<tr>
+						<td width="120">维修原因</td>
+						<td><textarea id="reason"  name="reason"  style="width:95%; height:50px">{$vo['reason']}</textarea></td>
+						</tr>
+						<tr>
+						<td width="120">维修厂商</td>
+						<td>
+							<select id="mfa_id" name="mfa_id">
+								<option value="0">请选择厂商...</option>
+								<volist name="moldfactory" id="vom" key="k">
+									<option value="{$vom['id']}" <if condition="$vo['mfa_id'] ==$vom['id']">selected="selected"</if>>{$vom['title']}</option>
+								</volist>
+							</select>
+						</td>
+						</tr>
+						<tr>
+						<td width="120">送修日期</td>
+						<td><input type="text" value="<php>if(!empty($vo['s_time'])&&$vo['s_time']>0){</php>{$vo['s_time']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="s_time" name="s_time" class="Wdate input-text  "></td>
+						</tr>
+						<tr>
+						<td width="120">写单日期</td>
+						<td><input type="text" value="<php>if(!empty($vo['ctime'])&&$vo['ctime']>0){</php>{$vo['ctime']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="ctime" name="ctime" class="Wdate input-text  "></td>
+						</tr>
+						<tr>
+						<td width="120">要求回厂日期</td>
+						<td><input type="text" value="<php>if(!empty($vo['rc_time'])&&$vo['rc_time']>0){</php>{$vo['rc_time']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="rc_time" name="rc_time" class="Wdate input-text  "></td>
+						</tr>
+						<tr>
+						<td width="120">模具实际到厂日期</td>
+						<td><input type="text" value="<php>if(!empty($vo['ac_time'])&&$vo['ac_time']>0){</php>{$vo['ac_time']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="ac_time" name="ac_time" class="Wdate input-text  "></td>
+						</tr>
+						<tr>
+						<td width="120">试模日期</td>
+						<td><input type="text" value="<php>if(!empty($vo['t_time'])&&$vo['t_time']>0){</php>{$vo['t_time']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="t_time" name="t_time" class="Wdate input-text  "></td>
+						</tr>
+						<tr>
+						<td width="120">判定结果</td>
+						<td>
+							<select id="m_status" name="m_status">
+								<option value="1" <if condition="$vo['m_status'] ==1">selected="selected"</if>>正常使用</option>
+								<option value="2" <if condition="$vo['m_status'] ==2">selected="selected"</if>>返厂维修</option>
+								<option value="3" <if condition="$vo['m_status'] ==3">selected="selected"</if>>模具报废</option>
+							</select>
+						</td>
+						</tr>
+      				</table>
+      			</td>
+      			<td>
+      				<table>
+      					<tr>
+						<td width="120">异常描述</td>
+						<td><textarea id="p_remark"  name="p_remark"  style="width:95%; height:50px">{$vo['p_remark']}</textarea></td>
+						</tr>
+						<tr>
+						<td width="120">异常责任归属</td>
+						<td><textarea id="p_vesting"  name="p_vesting"  style="width:95%; height:50px">{$vo['p_vesting']}</textarea></td>
+						</tr>
+						<tr>
+						<td width="120">最终结果</td>
+						<td><textarea id="l_result"  name="l_result"  style="width:95%; height:50px">{$vo['l_result']}</textarea></td>
+						</tr>
+						<tr>
+						<td width="120">验收人</td>
+						<td><input type="text" class="input-text"  name="accept" value="{$vo['accept']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">备注</td>
+						<td><textarea id="remark"  name="remark"  style="width:95%; height:50px">{$vo['remark']}</textarea></td>
+						</tr>
+      				</table>
+      			</td>
+      		</tr> 
+		</table>
+
+		<div class="btn">
+		<if condition="$action_name=='edit'"><input type="hidden" name="id" value="{$vo['id']}" /></if>
+		<INPUT TYPE="submit"  value="{:L('dosubmit')}" class="button" >
+		<input TYPE="reset"  value="{:L('cancel')}" class="button">
+		</div>
+		{__TOKEN__}
+      </form>
+     </div>

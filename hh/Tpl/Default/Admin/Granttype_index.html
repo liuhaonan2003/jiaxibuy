@@ -1,0 +1,63 @@
+<include file="Admin:header" />
+<table  class="search_table" width="100%">
+	<tr>
+		<td class="search">
+			<form action="{:U($module_name.'/index')}" method="get">
+			<input type="hidden" name="g" value="{$Think.GROUP_NAME}" />
+			<input type="hidden" name="m" value="{$Think.MODULE_NAME}" />
+			<input type="hidden" name="a" value="{$Think.ACTION_NAME}" />	
+
+			<input id="title" type="text" class="input-text" name="keyword" value="{$Think.get.keyword}" />
+			<select name="searchtype">			
+			<option value="title" <eq name="searchtype" value="title">selected="selected"</eq>>发放性质简称</option>
+			<!--<option value="id" <eq name="searchtype" value='id'>selected="selected"</eq>>ID</option>-->
+			</select>
+ 
+ 			<select name="sort">
+				<option value="asc" <if condition="$sort =='asc'">selected="selected"</if>>{:L('order_by_asc')}</option>
+				<option value="desc" <if condition="$sort =='desc'">selected="selected"</if>>{:L('order_by_desc')}</option>
+			</select>
+
+			<select name="listRows">
+				<option value="10" <if condition="$listRows ==10">selected="selected"</if>>10{:L('listRows')}</option>
+				<option value="15" <if condition="$listRows ==15">selected="selected"</if>>15{:L('listRows')}</option>
+				<option value="20" <if condition="$listRows ==20">selected="selected"</if>>20{:L('listRows')}</option>
+				<option value="50" <if condition="$listRows ==50">selected="selected"</if>>50{:L('listRows')}</option>
+				<option value="100" <if condition="$listRows ==100">selected="selected"</if>>100{:L('listRows')}</option>
+			</select>
+			
+			<input type="hidden" id="menuid" name="menuid" value="{$_GET['menuid']}"/>
+			<input type="submit" value="{:L('chaxun')}"  class="button" />
+			<input type="reset" value="{:L('reset')}" class="button"  />
+			</form>
+		</td>		
+	</tr>
+</table>
+
+<div class="pad-lr-10">
+<form name="myform" id="myform" action="" method="post">
+<div class="table-list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+			<th width="10"><input type="checkbox"  id="check_box"  onclick="selectall('ids[]');" /></th>
+            <th width="20" align="left">发放性质简称</th>
+            <th width="50" align="left">发放性质描述</th>
+			<th width="20">操作</th>
+            </tr>
+        </thead>
+	<tbody>
+    <volist name="list" id="vo" key="k">
+	<tr> 
+	<td align="center"><input type="checkbox" name="ids[]" value="{$vo['id']}" /></td>
+	<td>{$vo['title']}</td>	
+	<td>{$vo['note']}</td>	
+	<td align="center"><a href="{:U($module_name.'/edit',array(id=>$vo['id']))}">{:L('edit')}</a>| <a href="javascript:confirm_delete('{:U($module_name.'/delete',array( 'id' => $vo['id']))}')">{:L('delete')}</a></td>  		
+	</tr>
+	</volist>
+	</tbody>
+    </table>  
+    <div class="btn"><input type="button" class="button" name="dosubmit" value="<?php echo L('delete')?>" onclick="myform.action='{:U($module_name.'/deleteall')}';return confirm_deleteall('myform')"/></div>  </div>
+</form>
+</div>
+<div id="pages" class="page">{$page}</div>

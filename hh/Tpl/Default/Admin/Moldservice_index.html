@@ -1,0 +1,122 @@
+<include file="Admin:header" />
+<table  class="search_table" width="100%">
+	<tr>
+		<td class="search">
+			<form action="{:U($module_name.'/index')}" method="get">
+			<input type="hidden" name="g" value="{$Think.GROUP_NAME}" />
+			<input type="hidden" name="m" value="{$Think.MODULE_NAME}" />
+			<input type="hidden" name="a" value="{$Think.ACTION_NAME}" />	
+
+			<input id="title" type="text" class="input-text" name="keyword" value="{$Think.get.keyword}" />
+			<select name="searchtype">			
+			<option value="mf_id" <eq name="searchtype" value="mf_id">selected="selected"</eq>>模具编号</option>	
+			</select>
+			
+			模具厂商：
+ 			<select name="mfa_id">
+				<option value="0" <eq name="mfa_id" value='0'>selected="selected"</eq>>请选择</option>
+				<volist name="moldfactory" id="vo" key="k">
+					<option value="{$vo['id']}" <eq name="mfa_id" value="$vo['id']">selected="selected"</eq>>{$vo['title']}({$vo['sn']})</option>
+				</volist>
+			</select>
+			
+			送修日期：
+ 			<select name="s_time">
+				<option value="0" <eq name="s_time" value='0'>selected="selected"</eq>>请选择</option>
+				<volist name="dt" id="vo" key="k">
+					<option value="{$vo['date']}" <eq name="s_time" value="$vo['date']">selected="selected"</eq>>{$vo['title']}</option>
+				</volist>				
+			</select>
+			
+			要求回厂日期：
+ 			<select name="rc_time">
+				<option value="0" <eq name="rc_time" value='0'>selected="selected"</eq>>请选择</option>
+				<volist name="dt" id="vo" key="k">
+					<option value="{$vo['date']}" <eq name="rc_time" value="$vo['date']">selected="selected"</eq>>{$vo['title']}</option>
+				</volist>				
+			</select>
+			
+			实际回厂日期：
+ 			<select name="ac_time">
+				<option value="0" <eq name="ac_time" value='0'>selected="selected"</eq>>请选择</option>
+				<volist name="dt" id="vo" key="k">
+					<option value="{$vo['date']}" <eq name="ac_time" value="$vo['date']">selected="selected"</eq>>{$vo['title']}</option>
+				</volist>				
+			</select>
+ 
+ 			<select name="sort">
+				<option value="asc" <if condition="$sort =='asc'">selected="selected"</if>>{:L('order_by_asc')}</option>
+				<option value="desc" <if condition="$sort =='desc'">selected="selected"</if>>{:L('order_by_desc')}</option>
+			</select>
+
+			<select name="listRows">
+				<option value="10" <if condition="$listRows ==10">selected="selected"</if>>10{:L('listRows')}</option>
+				<option value="15" <if condition="$listRows ==15">selected="selected"</if>>15{:L('listRows')}</option>
+				<option value="20" <if condition="$listRows ==20">selected="selected"</if>>20{:L('listRows')}</option>
+				<option value="50" <if condition="$listRows ==50">selected="selected"</if>>50{:L('listRows')}</option>
+				<option value="100" <if condition="$listRows ==100">selected="selected"</if>>100{:L('listRows')}</option>
+			</select>
+			
+			<input type="hidden" id="menuid" name="menuid" value="{$_GET['menuid']}"/>
+			<input type="submit" value="{:L('chaxun')}"  class="button" />
+			<input type="reset" value="{:L('reset')}" class="button"  />
+			</form>
+		</td>		
+	</tr>
+</table>
+
+<div class="pad-lr-10">
+<form name="myform" id="myform" action="" method="post">
+<div class="table-list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+			<th width="5"><input type="checkbox"  id="check_box"  onclick="selectall('ids[]');" /></th>
+            <!--<th width="20" align="left">维修部门</th>-->
+            <th width="20" align="left">模具编号</th>
+            <!--<th width="20" align="left">模具数量</th>-->
+            <th width="30" align="left">维修原因</th>
+            <th width="20" align="left">维修厂商</th>
+            <th width="20" align="left">送修日期</th>
+            <th width="20" align="left">写单日期</th>
+            <th width="20" align="left">要求回厂日期</th>
+            <th width="20" align="left">实际到厂日期</th>
+            <th width="20" align="left">试模日期</th>
+            <th width="20" align="left">判定结果</th>
+            <!--<th width="20" align="left">异常描述</th>
+            <th width="20" align="left">异常责任归属</th>
+            <th width="20" align="left">最终结果</th>
+            <th width="20" align="left">验收人</th>
+            <th width="20">备注</th>-->
+			<th width="20">操作</th>
+            </tr>
+        </thead>
+	<tbody>
+    <volist name="list" id="vo" key="k">
+	<tr> 
+	<td align="center"><input type="checkbox" name="ids[]" value="{$vo['id']}" /></td>
+	<!--<td>{$vo['department']}</td>-->
+	<td><a href="javascript:opendialog('{:U($module_name."/show?do=show&id=".$vo['id']."&isajax=1")}','查看维修模具',900,520);" style="color:red;">{$vo['mf_id']}</a></td>
+	<!--<td>{$vo['mr_number']}</td>-->
+	<td>{$vo['reason']}</td>
+	<td>{$vo['mfa_id']}</td>
+	<td><if condition="$vo['s_time']!=0">{$vo['s_time']|date="Y-m-d",###}</if></td>
+	<td><if condition="$vo['ctime']!=0">{$vo['ctime']|date="Y-m-d",###}</if></td>
+	<td><if condition="$vo['rc_time']!=0">{$vo['rc_time']|date="Y-m-d",###}</if></td>
+	<td><if condition="$vo['ac_time']!=0">{$vo['ac_time']|date="Y-m-d",###}</if></td>
+	<td><if condition="$vo['t_time']!=0">{$vo['t_time']|date="Y-m-d",###}</if></td>
+	<td>{$vo['m_status']}</td>
+	<!--<td>{$vo['p_remark']}</td>
+	<td>{$vo['p_vesting']}</td>
+	<td>{$vo['l_result']}</td>
+	<td>{$vo['accept']}</td>
+	<td>{$vo['remark']}</td>-->
+	<td align="center"><a href="{:U($module_name.'/edit',array(id=>$vo['id']))}">{:L('edit')}</a>| <a href="javascript:confirm_delete('{:U($module_name.'/delete',array( 'id' => $vo['id']))}')">{:L('delete')}</a></td>  		
+	</tr>
+	</volist>
+	</tbody>
+    </table>  
+    <div class="btn"><input type="button" class="button" name="dosubmit" value="<?php echo L('delete')?>" onclick="myform.action='{:U($module_name.'/deleteall')}';return confirm_deleteall('myform')"/></div>  </div>
+</form>
+</div>
+<div id="pages" class="page">{$page}</div>

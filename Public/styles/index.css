@@ -1,0 +1,92 @@
+@charset "utf-8";
+/*----------------------------
+Author:lgc
+Create date:2011-06
+Modify Author/date:2011-07
+Title:www.lgc.com
+----------------------------*/
+
+.content {width:960px;margin:0 auto;margin-top:30px;}
+
+h2 {font-family:"幼圆",黑体,宋体,Arial;font-weight:bold;font-size:28px;padding-top:10px;}
+
+h3 {font-size:16px;font-weight:bold;}
+
+a {font:12px/22px Verdana,Arial,sans-serif,"Times New Roman",宋体;}
+/*
+ * 左边内容
+ */
+.content .left {
+	width:465px;
+	float:left;
+}
+.content .left .aboutUs {
+	margin-bottom:30px;
+}
+.content .left .aboutUs p {
+    margin-top:15px;
+	color:#898989;
+}
+.content .left .aboutUs span {
+	background:black;
+	color:#fff;
+}
+.content .left .aboutUs span em {
+	color:red;
+}
+.content .left .fieldNews {
+	position:relative;
+	margin-top:10px;
+}
+.content .left .fieldNews h2 span {
+	position:absolute;
+	top:15px;
+	right:0;
+}
+.content .fieldNews ul li {
+	color:#515151;
+	text-indent:10px;
+	background:url(../img/index/dian_23.jpg) no-repeat left center;
+}
+.content .fieldNews ul li em{
+	float:right;
+	color:#898989;
+}
+
+
+.content .right {
+	width:465px;
+	float:right;
+	
+}
+.content .right .biz ul li a{
+	display:block;
+	width:465px;
+	height:82px;
+	background:url(../img/index/default_bg_10.jpg) no-repeat;
+	margin-top:20px;
+}
+.content .right .biz ul li a:hover {
+	background:url(../img/index/hover_bg_03.jpg) no-repeat;
+	color:#fff;
+	cursor:pointer;
+	text-decoration:none;
+}
+.content .right .biz ul li a:hover span img {
+	border:1px solid #fff;
+	text-decoration:none;
+}
+.content .right .biz ul li img{
+	float:right;
+	margin-top:8px;
+	margin-right:8px;
+	border:1px solid red;
+}
+.content .right .biz ul li h3 {
+	padding-left:50px;
+	padding-top:10px;
+}
+.content .right .biz ul li p {
+	padding-left:50px;
+	padding-right:190px;
+}

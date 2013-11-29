@@ -1,0 +1,137 @@
+<include file="Admin:header" />
+<style>
+#cart_box{  overflow:hidden;margin-top:15px;}
+#buy_ico {float:left;width:90px;height:95px;margin:5px 35px;_margin:5px 25px;background:url(cart.jpg) no-repeat;}
+#buy_tab {float:left;margin-top:40px;background:url(buy_tabs.gif) no-repeat;width:385px;height:35px;line-height:35px;}
+#buy_tab ul {margin:0;padding:0;width:385px;height:35px;line-height:35px;background:url(buy_on.gif) no-repeat -20px 0;}
+#buy_tab ul.buy_1 {background:url(buy_on.gif) no-repeat 106px 0;}
+#buy_tab ul.buy_2 {background:url(buy_on.gif) no-repeat 231px 0;}
+#buy_tab ul li {float:left;width:105px;margin:0;text-align:center;padding-right:20px;}
+#buy_tab ul li.one {width:105px;}
+.order_table{ width:100%;  margin:0 auto; overflow:hidden;}
+.order_table table{ width:100%; margin:20px auto;border:1px solid #eee;}
+.order_table table th { border-bottom:2px #E2E9EA solid;background:#EEF3F7;color:#333;height:35px;}
+.order_table table td { border-bottom:1px #eee solid; border-left:1px #eee solid; background:#F8F8F8;}
+.order_table table td .num {text-align:center;}
+#prototal{ float:right; margin:25px 15px 10px 0; display:inline;line-height:40px;}
+#prototal span{ float:left;line-height:40px;}
+#prototal span#totalnum {color:#FF3300;}
+#prototal span#totalprice {color:#FF3300;font-size:18px;font-weight:bold;}
+#buy_button{float:right; height:35px; margin:20px 25px 0px 0;_margin:20px 15px 0 0; display:inline;}
+#buy_button img{ border:none;margin-left:60px;}
+.img_but { border:none;margin-left:60px;}
+.order_userinfo {margin:0 15px;}
+.order_userinfo h2 {background: #9FD2FF;height:35px;line-height:35px;border:none;}
+.order_userinfo ul {padding:5px;}
+.order_userinfo ul li {line-height:28px;clear:both;}
+.order_userinfo ul li input {line-height:18px;height:18px;padding:2px 3px;width:190px;}
+.order_userinfo ul li span {float:left;width:80px;}
+.order_ok_message {color:both;padding:20px;text-align:center;font-size:14px;color:#FB0000;line-height:26px;}
+
+</style>
+		<div class="order_table">
+					
+
+					 <form id="myform" action="<if condition="$action_name=='add'">{:U($module_name.'/insert')}<else />{:U($module_name.'/update')}</if>" method="post">
+					
+					<table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+ 
+                          <tr align="center">
+							<th colspan="4"  align="center"><span style="float:right;padding:5px;line-height:22px;">创建时间:{$cart['createtime']|toDate=###,'Y-m-d H:i:s'}</span> <span style="float:left;padding:5px;color:#FB0000;line-height:22px;">订单编号:{$cart['sn']}</span>
+							</th>
+                          </tr>
+					<tr>
+					<td>{%status}</td>
+					<td><select id="status" name="status">		 
+					<option value="0" <if condition="$cart['status'] ==0">selected="selected"</if>>{%status_0}</option>
+					<option value="1" <if condition="$cart['status'] ==1">selected="selected"</if>>{%status_1}</option>
+					</select></td>
+					<td>{:L('password')}</td><td><input type="password" id="pwd" name="pwd" class="input-text" validate=" <if condition="$action_name=='add'">required:true,</if> minlength:5, maxlength:20,"/></td>					
+					</tr>
+ 		
+					<tr>
+						<td>{:L('realname')}</td>
+						<td><input type="text" class="input-text"  name="realname" value="{$cart.realname}" ></td>
+						<td width="120">{:L('reguser')}</td>
+						<td>{$vo['username']}</td>
+						
+					</tr>
+					<tr>
+						<td>{:L('email')}</td>
+						<td><input type="text" class="input-text"  name="email" value="{$cart.email}" validate="required:true,email:true, minlength:1, maxlength:40,"></td>
+						<td>{:L('telephone')}</td>
+						<td><input type="text" class="input-text"  name="tel" value="{$cart.tel}"></td>
+					</tr> 
+	 
+					<tr>
+						<td>{:L('mobile')}</td>
+						<td><input type="text" class="input-text"  name="mobile" value="{$cart.mobile}"></td>
+						<td>{:L('fax')}</td>
+						<td><input type="text" class="input-text"  name="fax" value="{$cart.fax}"></td>
+					</tr>
+ 
+					<tr>
+						<td>{:L('address')}</td>
+						<td><input type="text" class="input-text"  name="address" value="{$cart.address}"></td>
+						<td>{:L('zipcode')}</td>
+						<td><input type="text" class="input-text"  name="zipcode" value="{$cart.zipcode}"></td>
+					</tr>
+		 
+
+					</table>
+
+				
+				<div class="c"></div>
+
+
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                          <tr align="center">
+							<th width="15%">商品图片</th>
+                            <th width="35%">商品名称</th>
+                            <th width="10%">单价</th>
+                            <th width="12%">数量</th>
+                            <th width="13%">小计（RMB）</th>
+                            <th>操作</td>
+                          </tr>
+						  <if condition="empty($cart['productlist'])">
+							 <tr align="center">
+							 <td colspan="6"  style="padding:10px;border:0;color:#FB0000;" align="center">您的购物车为空!</td>
+							 </tr>
+						  <else/>
+						  <volist name="cart['productlist']" id="vo">
+                          <tr align="center">
+							<td height="70" style="border-left:none;"><img src="{$vo['thumb']}" width="60" height="60"/></td>
+							<td>{$vo['title']}</td>
+							<td>{$vo['price']}</td>
+							<td>
+							{$vo['num']}
+							</td>
+							<td ><span class="count_price" id="count_price_{$vo['id']}">{$vo['countprice']|number_format=###,2}</span></td>
+							<td>删除</td>
+						 </tr>
+						 </volist>
+						 </if>
+						</table>
+                    </div>
+                    <div id="prototal">
+      					<span>商品总数：</span><span id="totalnum">{$cart['totalnum']|intval}</span><span> 件，</span>
+                    	<span>总价：</span><span id="totalprice">{$cart['totalprice']|number_format=###,2}</span><span> RMB&nbsp;&nbsp;</span>
+                    </div>
+					<div class="c"></div>
+
+			
+				<div class="btn">
+					<if condition="$action_name=='edit'"><input type="hidden" name="id" value="{$vo['id']}" />
+					<input type="hidden" name="opwd" value="{$vo['password']}" /></if>
+					<INPUT TYPE="submit"  value="{:L('dosubmit')}" class="button" >
+					<input TYPE="reset"  value="{:L('cancel')}" class="button">
+					</div>
+
+{__TOKEN__}
+				  </form>
+
+					<br>
+			</div>
+		<br>
+</div>
+ 

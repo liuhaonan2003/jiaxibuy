@@ -1,0 +1,12 @@
+<include file="Admin:header" />
+<fieldset>
+<form  id="myform" name="myform" action="{:U($module_name.'/batch?do='.$do)}" method="post" enctype="multipart/form-data">
+    <table class="table_form"  cellspacing='1' cellpadding='3' width="100%">
+    	<tr>
+    		<td width="120" align="right">批量上传:</td>
+			<td><input type="file" name="data_xls" /></td>
+    	</tr>
+    </table>
+    <input name="dosubmit" type="submit" value="开始上传"  id="dosubmit">
+</form>
+</fieldset>

@@ -1,0 +1,21 @@
+<include file="Admin:header" />
+<form id="myform" action="<if condition="$action_name=='add'">{:U($module_name.'/insert')}<else />{:U($module_name.'/update')}</if>" method="post">
+      	<table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+      	<tr>
+		<td width="120">类别名称</td>
+		<td><input type="text" class="input-text"  name="title" value="{$vo['title']}" /></td>
+		</tr>
+		<tr>
+			<td>类别描述</td>
+			<td><textarea id="note"  name="note"  style="width:95%; height:50px">{$vo['note']}</textarea></td>
+		</tr>
+		</table>
+
+		<div class="btn">
+		<if condition="$action_name=='edit'"><input type="hidden" name="id" value="{$vo['id']}" /></if>
+		<INPUT TYPE="submit"  value="{:L('dosubmit')}" class="button" >
+		<input TYPE="reset"  value="{:L('cancel')}" class="button">
+		</div>
+		{__TOKEN__}
+      </form>
+     </div>

@@ -1,0 +1,139 @@
+<include file="Admin:header" />
+<div class="table-list">
+	<table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+	            <th style="background-color:#C8C8C8">订单关联（成品关联模具）</th>
+            </tr>
+        </thead>
+    </table>
+    <table width="100%" cellspacing="1">
+        <thead>
+            <tr>
+	            <th width="20" align="left" style="background-color: #DCE2F3">成品编号</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">成品/规格</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">客户名称</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">客户型号</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">生产类型</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">备注</th>
+            </tr>
+        </thead>
+		<tbody>
+			<tr>
+				<td>{$vo['p_sn']}</td>
+				<td>{$vo['p_title_format']}</td>
+				<td>{$vo['c_sn']}</td>
+				<td>{$vo['p_model']}</td>
+				<td>{$vo['p_type']}</td>
+				<td><textarea id="remark"  name="remark"  style="width:95%; height:50px">{$vo['remark']}</textarea></td>
+			</tr>
+		</tbody>
+    </table>
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+	            <th style="background-color:#C8C8C8">插头模具编号</th>
+            </tr>
+        </thead>
+    </table>
+    <table width="100%" cellspacing="1">
+        <thead>
+            <tr>
+	            <th width="20" align="left" style="background-color: #DCE2F3">线径</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">插头类别</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑内模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑一次模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑二次模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">插头类别</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑内模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑一次模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑二次模</th>
+            </tr>
+        </thead>
+		<tbody>
+			<tr>
+				<td>{$vo['ext1']}</td>
+				<td>{$vo['ext2']}</td>
+				<td>{$vo['ext3']}</td>
+				<td>{$vo['ext4']}</td>
+				<td>{$vo['ext5']}</td>
+				<td>{$vo['ext6']}</td>
+				<td>{$vo['ext7']}</td>
+				<td>{$vo['ext8']}</td>
+				<td>{$vo['ext9']}</td>
+			</tr>
+		</tbody>
+    </table>  
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+	            <th colspan="4" style="background-color:#C8C8C8">磁环模具编号</th>
+	            <th colspan="4" style="background-color:#C8C8C8">SR线档模具编号</th>
+            </tr>
+        </thead>
+    </table>  
+    <table width="100%" cellspacing="1">
+        <thead>
+            <tr>
+	            <th width="20" align="left" style="background-color: #DCE2F3">线径</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑内模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑一次模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑二次模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">线径</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑内模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑一次模</th>
+	            <th width="20" align="left" style="background-color: #DCE2F3">注塑二次模</th>
+            </tr>
+        </thead>
+		<tbody>
+			<tr>
+				<td>{$vo['ext10']}</td>
+				<td>{$vo['ext11']}</td>
+				<td>{$vo['ext12']}</td>
+				<td>{$vo['ext13']}</td>
+				<td>{$vo['ext14']}</td>
+				<td>{$vo['ext15']}</td>
+				<td>{$vo['ext16']}</td>
+				<td>{$vo['ext17']}</td>
+			</tr>
+		</tbody>
+    </table>
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+	            <th style="background-color:#C8C8C8">模具列表</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div class="pad-lr-10">
+<div class="table-list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+            <th width="20">模具编号</th>
+            <th width="20" align="left">线经</th>
+            <th width="20" align="left">模具设计次数</th>
+            <th width="20" align="left">剩余使用次数</th>
+            <th width="20" align="left">存放位置</th>
+            <th width="20" align="left">目前位置</th>
+            <th width="20" align="left">模具操作</th>
+            </tr>
+        </thead>
+	<tbody>
+    <volist name="moldfile" id="mo" key="k">
+	<tr>
+	<td>{$mo['m_sn']}</td>
+	<td>{$mo['m_od']}</td>
+	<td>{$mo['mu_total']}</td>
+	<td>{$mo['mr_number']}</td>
+	<td>{$mo['ms_location']}</td>
+	<td>{$mo['mc_position']}</td>
+	<td id="is_{$mo['id']}"><if condition="empty($mo['mc_position'])"><a href="javascript:opendialog('{:U($module_name."/logging?do=logging&id=".$mo['log_id']."&isajax=1&type=insert&mfid=".$mo['id']."&ordersid=".$_REQUEST['ordersid']."")}','登记模具使用记录',900,520);" style="color:red;">使用登记</a><else /><a href="javascript:opendialog('{:U($module_name."/logging?do=logging&id=".$mo['log_id']."&isajax=1&type=update&mfid=".$mo['id']."&ordersid=".$_REQUEST['ordersid']."")}','登记模具使用记录',900,520);" style="color:blue;">模具没空<a></a></if></td>
+	</tr>
+	</volist>
+	</tbody>
+    </table>  
+    <div class="btn"></div>  </div>
+</div>
+{__TOKEN__}

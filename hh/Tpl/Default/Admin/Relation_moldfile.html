@@ -1,0 +1,58 @@
+<link rel="stylesheet" type="text/css" href="./Public/Css/style.css" />
+<script language="JavaScript">
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+</script>
+<script type="text/javascript" src="./Public/Js/jquery.min.js"></script>
+<script type="text/javascript">
+function set_moldlogging(id){
+	var parent=id;
+	var url="{:U($module_name.'/addmoldlogging')}";
+	 $.ajax({
+	 	type: "POST",
+		url:url,
+        data: {parent:parent},
+        dataType: "json",
+        success:function(data){
+        	if(data.status==1){
+        		$("#is_"+id).text(data.msg);
+        		//alert(data.msg);
+        	}else{
+        		alert(data.msg);
+        	}
+        }
+	});
+}
+</script>
+<div class="pad-lr-10">
+<div class="table-list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+            <th width="20">模具编号</th>
+            <th width="20" align="left">线经</th>
+            <th width="20" align="left">模具设计次数</th>
+            <th width="20" align="left">剩余使用次数</th>
+            <th width="20" align="left">存放位置</th>
+            <th width="20" align="left">目前位置</th>
+            <th width="20" align="left">模具操作</th>
+            </tr>
+        </thead>
+	<tbody>
+    <volist name="moldfile" id="vo" key="k">
+	<tr>
+	<td>{$vo['m_sn']}</td>
+	<td>{$vo['m_od']}</td>
+	<td>{$vo['mu_total']}</td>
+	<td>{$vo['mr_number']}</td>
+	<td>{$vo['ms_location']}</td>
+	<td>{$vo['mc_position']}</td>
+	<td id="is_{$vo['id']}"><if condition="empty($vo['mc_position'])"><a href="javascript:set_moldlogging({$vo['id']});" style="color:red;">使用登记</a><else />模具没空</if></td>
+	</tr>
+	</volist>
+	</tbody>
+    </table>  
+    <div class="btn"></div>  </div>
+</div>
+<div id="pages" class="page">{$page}</div>

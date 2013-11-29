@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+#bd .main {width:715px;float:right;}
+
+#bd .main h1 {font-family:"幼圆",黑体,宋体,Arial;font-weight:bold;font-size:26px;line-height:60px;}
+
+#bd .main dl {
+	display:inline;
+	float:left;
+	margin-right:8px;
+}
+#bd .main dl dt {
+	display:inline;
+	font-weight:bold;
+}
+#bd .main dl dd {
+	margin-bottom:25px;
+}
+#bd .main a img {
+	border:2px solid #ccc;
+}
+#bd .main a {
+	display:block;
+    zoom:1;
+	float:left;
+}
+#bd .main a:hover {
+	color:red;
+	text-decoration:none;
+}
+#bd .main a:hover dl dd img {
+	border:2px solid red;
+}
+#bd .main p {
+	color:#626262;
+}
+#bd .main .probjct_lst {
+	border-bottom:1px solid #ccc;
+	margin-bottom:20px;
+	zoom:1;
+	overflow:hidden;
+}
+#bd .main .article span {
+	font-size:16px;
+}
+#bd .main .article p {
+	text-indent:25px;
+}

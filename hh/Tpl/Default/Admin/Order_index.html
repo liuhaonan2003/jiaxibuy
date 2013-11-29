@@ -1,0 +1,99 @@
+<include file="Admin:header" />
+ 
+
+
+<table  class="search_table" width="100%">
+	<tr>
+		<td class="search">
+			<form action="{:U($module_name.'/index')}" method="get">
+			<input type="hidden" name="g" value="{$Think.GROUP_NAME}" />
+			<input type="hidden" name="m" value="{$Think.MODULE_NAME}" />
+			<input type="hidden" name="a" value="{$Think.ACTION_NAME}" />	
+
+			<input id="title" type="text" class="input-text" name="keyword" value="{$Think.get.keyword}" />
+			<select name="searchtype">
+			<option value="sn" <eq  name="searchtype" value='sn'>selected="selected"</eq>>{:L('order_sn')}</option>
+			<option value="realname" <eq name="searchtype" value='realname'>selected="selected"</eq>>{:L('realname')}</option>
+			<option value="username" <eq name="searchtype" value="username">selected="selected"</eq>>{:L('username')}</option>
+			<option value="userid" <eq name="searchtype" value="userid">selected="selected"</eq>>{:L('userid')}</option>
+			<option value="id" <eq name="searchtype" value='id'>selected="selected"</eq>>ID</option>
+			</select>
+ 
+ 
+			<select id="status" name="status">
+			<option value="">{:L('order_status')}</option>			 
+			<option value="0" <if condition="isset($status) && $status ==0">selected="selected"</if>>{%status_0}</option>
+			<option value="1" <if condition="isset($status) && $status ==1">selected="selected"</if>>{%status_1}</option>
+			</select>
+			 
+			
+			<select id="order" name="order">
+			<option value="listorder" <if condition="$order =='listorder'">selected="selected"</if>>{:L('listorder')}</option>
+			<option value="id" <if condition="$order =='id'">selected="selected"</if>>ID</option>
+			<option value="price" <if condition="$order =='price'">selected="selected"</if>>price</option>
+			</select>
+			
+			<select name="sort">
+				<option value="asc" <if condition="$sort =='asc'">selected="selected"</if>>{:L('order_by_asc')}</option>
+				<option value="desc" <if condition="$sort =='desc'">selected="selected"</if>>{:L('order_by_desc')}</option>
+			</select>
+
+			<select name="listRows">
+				<option value="15" <if condition="$listRows ==5">selected="selected"</if>>15{:L('listRows')}</option>
+				<option value="20" <if condition="$listRows ==20">selected="selected"</if>>20{:L('listRows')}</option>
+				<option value="50" <if condition="$listRows ==50">selected="selected"</if>>50{:L('listRows')}</option>
+				<option value="100" <if condition="$listRows ==100">selected="selected"</if>>100{:L('listRows')}</option>
+			</select>
+			
+			<input type="hidden" id="menuid" name="menuid" value="{$_GET['menuid']}"/>
+			<input type="submit" value="{:L('chaxun')}"  class="button" />
+			<input type="reset" value="{:L('reset')}" class="button"  />
+			</form>
+		</td>
+		
+	</tr>
+</table>
+
+<form name="myform" id="myform" action="" method="post">
+
+<div class="table-list">
+    <table width="100%" cellspacing="0">
+		<thead> 
+            <tr> 
+			<th width="30"><input type="checkbox" value="" id="check_box" onclick="selectall('ids[]');"></th>          
+            <th width="40">ID</th> 
+			<th width="140">{:L('order_sn')}</th> 
+            <th width="100" align="left">{:L('price')}</th> 
+            <th width="80" align="left">{:L('realname')}</th>
+			<th width="150" align="left">{:L('tel')}</th> 
+            <th  align="left">{:L('createtime')}</th> 
+			<th width="72">{:L('manage')}</th> 
+            </tr> 
+        </thead> 
+      	<tbody>
+      		<volist name="list" id="vo" key="k">
+      		<tr>
+			<td align="center"><input class="inputcheckbox " name="ids[]" value="{$vo['id']}" type="checkbox" ></td>
+			<td align="center">{$vo['id']}</td>
+      		<td>{$vo.sn}</td>
+			<td><font color="red">{$vo.price|number_format=###,2}元</font></td>
+      		<td>{$vo['realname']}</td>  
+			<td>{$vo['tel']}</td> 
+      		<td>{$vo['createtime']|toDate=###,'Y-m-d H:i:s'}</td>			
+			<td align="center"><a href="{:U($module_name.'/edit',array(id=>$vo['id']))}">{:L('edit')}</a> | <a href="javascript:confirm_delete('{:U($module_name.'/delete',array(id=>$vo['id']))}')">{:L('delete')}</a></td>      		
+      		</tr>
+      		</volist>
+      	</tbody>
+    </table>
+  
+    <div class="btn"><input type="button" class="button" name="dosubmit" value="<?php echo L('delete')?>" onclick="myform.action='{:U($module_name.'/deleteall')}';return confirm_deleteall()"/> <input  type="button" class="button" name="dosubmit" value="<?php echo L('listorder')?>" onclick="myform.action='{:U($module_name.'/listorder')}';$('#myform').submit();" /></div> 
+
+</form></div>    
+
+<div id="pages" class="page">{$page}</div>
+<script>
+$("#catid").attr("value",'{$catid}');
+function confirm_deleteall(){
+	art.dialog.confirm("{:L('real_delete')}", function(){ $('#myform').submit();});
+}
+</script>

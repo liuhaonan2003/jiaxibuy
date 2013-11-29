@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+#bd .main {width:715px;float:right;}
+
+#bd .main .content {
+	margin-top:20px;
+}
+
+#bd .main .content img {
+	float:left;
+	margin:10px;
+}
+#bd .main .content p {
+	text-indent:25px;
+	margin-top:15px;
+}

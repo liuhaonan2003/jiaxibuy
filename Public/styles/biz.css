@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+#bd .main {width:715px;float:right;}
+
+#bd .main .article {
+	margin-top:15px;
+	font-weight:bold;
+}
+#bd .main .article span {
+	font-size:14px;
+	color:red;
+}
+
+#bd .main .product h2 {
+	margin:10px 0 20px 0;
+	font-size:13px;
+	font-weight:bold;
+	color:red;
+	
+}
+#bd .main .product .myPd{
+	margin-bottom:20px;
+}
+#bd .main .product .myPd img {
+	border:1px solid #ccc;
+}
+
+#bd .main .product .myPd dl {
+	padding-top:10px;
+	padding-left:10px;
+}
+#bd .main .product .myPd dl dt {
+	font-size:13px;
+	font-weight:bold;
+}
+#bd .main .product .myPd dl dd {
+	color:#666;
+}

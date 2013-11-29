@@ -1,0 +1,128 @@
+<link rel="stylesheet" type="text/css" href="./Public/Css/style.css" />
+<script language="JavaScript">
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+</script>
+<script type="text/javascript" src="./Public/Js/jquery.min.js"></script>
+<script type="text/javascript" src="./Public/Js/swfupload.js"></script>
+<script type="text/javascript">
+function issn(input_sn,mfid,mrid){
+	var sn=$(input_sn).val();
+	var url="{:U($module_name.'/issn')}";
+	 $.ajax({
+	 	type: "POST",
+		url:url,
+        data: {sn:sn,mfid:mfid,mrid:mrid},
+        dataType: "json",
+        success:function(data){
+        	if(data.status==1){
+        		$("#m_sn_msg").text(data.msg);
+        	}else{
+        		$("#m_sn_msg").text(data.msg);
+        	}
+        }
+	});
+}
+</script>
+<fieldset>
+<form  id="myform" name="myform" action="{:U($module_name.'/show?do='.$do)}" method="post">
+    <table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+      		<tr>
+      			<td>
+      				<table>
+      					<tr>
+						<td width="120">使用部门</td>
+						<td><select id="department" name="department">
+							<option value="0">请选择部门...</option>
+							<volist name="moldvesting" id="vom" key="k">
+								<option value="{$vom['id']}" <if condition="$vo['department'] ==$vom['id']">selected="selected"</if>>{$vom['title']}</option>
+							</volist>
+						</select></td>
+						</tr>
+						<tr>
+						<td width="120">模具编号</td>
+						<td><input type="text" class="input-text"  name="m_sn" value="{$vo['m_sn']}" id="m_sn" onblur="javascript:issn(this,{$moldfile['id']?$moldfile['id']:0},{$vo['id']?$vo['id']:0});"/><a id="m_sn_msg"></a></td>
+						</tr>
+						<tr>
+						<td width="120">模具名称</td>
+						<td><input type="text" class="input-text"  name="m_title" value="{$vo['m_title']}" /></td>
+						</tr>						
+						<tr>
+						<td width="120">模具次数</td>
+						<td><input type="text" class="input-text"  name="m_number" value="{$vo['m_number']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">增开原因</td>
+						<td><textarea id="reason"  name="reason"  style="width:95%; height:50px">{$vo['reason']}</textarea></td>
+						</tr>
+						<tr>
+							<td width="120">增开厂商</td>
+							<td>
+								<select id="mfa_id" name="mfa_id">
+									<option value="0">请选择厂商...</option>
+									<volist name="moldfactory" id="vom" key="k">
+										<option value="{$vom['id']}" <if condition="$vo['mfa_id'] ==$vom['id']">selected="selected"</if>>{$vom['title']}</option>
+									</volist>
+								</select>
+							</td>
+						</tr>
+						<tr>
+						<td width="120">增开结果</td>
+						<td><textarea id="o_result"  name="o_result"  style="width:95%; height:50px">{$vo['o_result']}</textarea></td>
+						</tr>
+						<tr>
+						<td width="120">申请人</td>
+						<td><input type="text" class="input-text"  name="applicant" value="{$vo['applicant']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">申请日期</td>
+						<td><input type="text" value="<php>if(!empty($vo['ctime'])&&$vo['ctime']>0){</php>{$vo['ctime']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="ctime" name="ctime" class="Wdate input-text  "></td>
+						</tr>
+						<tr>
+						<td width="120">回厂日期</td>
+						<td><input type="text" value="<php>if(!empty($vo['complete_time'])&&$vo['complete_time']>0){</php>{$vo['complete_time']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="complete_time" name="complete_time" class="Wdate input-text  "></td>
+						</tr>
+      				</table>
+      			</td>
+      			<td>
+      				<table>
+      					<tr>
+						<td width="120">厂商试模结果</td>
+						<td><textarea id="ft_result"  name="ft_result"  style="width:95%; height:50px">{$vo['ft_result']}</textarea></td>
+						</tr>
+						<tr>
+						<td width="120">厂商试模报告</td>
+						<td><textarea id="ft_report"  name="ft_report"  style="width:95%; height:50px">{$vo['ft_report']}</textarea></td>
+						</tr>
+						<tr>
+						<td width="120">内部试模结果</td>
+						<td><textarea id="it_result"  name="it_result"  style="width:95%; height:50px">{$vo['it_result']}</textarea></td>
+						</tr>
+						<tr>
+						<td width="120">内部试模报告</td>
+						<td><textarea id="it_report"  name="it_report"  style="width:95%; height:50px">{$vo['it_report']}</textarea></td>
+						</tr>
+						<tr>
+							<td>备注</td>
+							<td><textarea id="remark"  name="remark"  style="width:95%; height:50px">{$vo['remark']}</textarea></td>
+						</tr>
+						<tr>
+							<td width="120">申请状态</td>
+							<td>
+								<select id="status" name="status">
+									<volist name="arr_status" id="vom" key="k">
+										<option value="{$k}" <if condition="$vo['status'] ==$k">selected="selected"</if>>{$vom}</option>
+									</volist>
+								</select>
+							</td>
+						</tr>
+      				</table>
+      			</td>
+      		</tr>
+		</table>
+		<input type="hidden" name="mfid" value="{$moldfile['id']}" />
+    <input type="hidden" name="id" value="{$vo['id']}">
+    <input name="dosubmit" type="submit" value="1" class="hidden" id="dosubmit">
+  </form>
+</fieldset>

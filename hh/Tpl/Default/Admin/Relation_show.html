@@ -1,0 +1,143 @@
+<link rel="stylesheet" type="text/css" href="./Public/Css/style.css" />
+<script language="JavaScript">
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+</script>
+<script type="text/javascript" src="./Public/Js/jquery.min.js"></script>
+<script type="text/javascript" src="./Public/Js/swfupload.js"></script>
+<fieldset>
+<form  id="myform" name="myform" action="{:U($module_name.'/show?do='.$do)}" method="post">
+    <table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                        <td width="120">成品编号</td>
+                        <td><input type="text" class="input-text"  name="p_sn" value="{$vo['p_sn']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">成品/规格</td>
+                        <td><input type="text" class="input-text"  name="p_title_format" value="{$vo['p_title_format']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">客户名称</td>
+                        <td><input type="text" class="input-text"  name="c_sn" value="{$vo['c_sn']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">客户型号</td>
+                        <td><input type="text" class="input-text"  name="p_model" value="{$vo['p_model']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">生产类型</td>
+                        <td><input type="text" class="input-text"  name="p_type" value="{$vo['p_type']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">备注</td>
+                        <td><textarea id="remark"  name="remark"  style="width:95%; height:50px">{$vo['remark']}</textarea></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>插头模具编号</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>线径</td>
+                                        <td><input type="text" class="input-text"  name="ext1" value="{$vo['ext1']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>插头类别</td>
+                                        <td><input type="text" class="input-text"  name="ext2" value="{$vo['ext2']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑内模</td>
+                                        <td><input type="text" class="input-text"  name="ext3" value="{$vo['ext3']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑一次模</td>
+                                        <td><input type="text" class="input-text"  name="ext4" value="{$vo['ext4']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑二次模</td>
+                                        <td><input type="text" class="input-text"  name="ext5" value="{$vo['ext5']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>插头类别</td>
+                                        <td><input type="text" class="input-text"  name="ext6" value="{$vo['ext6']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑内模</td>
+                                        <td><input type="text" class="input-text"  name="ext7" value="{$vo['ext7']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑一次模</td>
+                                        <td><input type="text" class="input-text"  name="ext8" value="{$vo['ext8']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑二次模</td>
+                                        <td><input type="text" class="input-text"  name="ext9" value="{$vo['ext9']}" /></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>磁环模具编号</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>线径</td>
+                                        <td><input type="text" class="input-text"  name="ext10" value="{$vo['ext10']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑内模</td>
+                                        <td><input type="text" class="input-text"  name="ext11" value="{$vo['ext11']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑一次模</td>
+                                        <td><input type="text" class="input-text"  name="ext12" value="{$vo['ext12']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑二次模</td>
+                                        <td><input type="text" class="input-text"  name="ext13" value="{$vo['ext13']}" /></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>SR线档模具编号</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>线径</td>
+                                        <td><input type="text" class="input-text"  name="ext14" value="{$vo['ext14']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑内模</td>
+                                        <td><input type="text" class="input-text"  name="ext15" value="{$vo['ext15']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑一次模</td>
+                                        <td><input type="text" class="input-text"  name="ext16" value="{$vo['ext16']}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>注塑二次模</td>
+                                        <td><input type="text" class="input-text"  name="ext17" value="{$vo['ext17']}" /></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>               
+            </tr>
+        </table>
+    <input type="hidden" name="id" value="{$vo['id']}">
+    <input name="dosubmit" type="submit" value="1" class="hidden" id="dosubmit">
+  </form>
+</fieldset>

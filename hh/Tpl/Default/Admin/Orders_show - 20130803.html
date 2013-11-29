@@ -1,0 +1,110 @@
+<link rel="stylesheet" type="text/css" href="./Public/Css/style.css" />
+<script language="JavaScript">
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+</script>
+<script type="text/javascript" src="./Public/Js/jquery.min.js"></script>
+<script type="text/javascript" src="./Public/Js/swfupload.js"></script>
+<fieldset>
+<form  id="myform" name="myform" action="{:U($module_name.'/show?do='.$do)}" method="post">
+    <table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+      		<tr>
+      			<td>
+      				<table>
+      					<tr>
+						<td width="120">录入日期</td>
+						<td><input type="text" value="<php>if(!empty($vo['ctime'])&&$vo['ctime']>0){</php>{$vo['ctime']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="ctime" name="ctime" class="Wdate input-text  "></td>
+						</tr>
+						<tr>
+						<td width="120">月上线计划</td>
+						<td><input type="text" class="input-text"  name="month_plan" value="{$vo['month_plan']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">日上线计划</td>
+						<td><input type="text" class="input-text" name="day_plan" value="{$vo['day_plan']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">增加时间</td>
+						<td><input type="text" class="input-text"  name="add_date" value="{$vo['add_date']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">扎线班</td>
+						<td><input type="text" class="input-text"  name="z_team" value="{$vo['z_team']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">包装班</td>
+						<td><input type="text" class="input-text"  name="b_team" value="{$vo['b_team']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">出货日期</td>
+						<td><input type="text" class="input-text"  name="complete_time" value="{$vo['complete_time']}" /></td>
+						</tr>						
+      				</table>
+      			</td>
+      			<td>
+      				<table>
+      					<tr>
+						<td width="120">出/验</td>
+						<td><input type="text" class="input-text"  name="pass" value="{$vo['pass']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">客户编号</td>
+						<td><input type="text" class="input-text"  name="c_sn" value="{$vo['c_sn']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">订单号</td>
+						<td><input type="text" class="input-text"  name="sn" value="{$vo['sn']}" /></td>
+						</tr>
+      					<tr>
+						<td width="120">SAP号</td>
+						<td><input type="text" class="input-text"  name="sap" value="{$vo['sap']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">po#/日期贴</td>
+						<td><input type="text" class="input-text"  name="po_date" value="{$vo['po_date']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">客户型号</td>
+						<td><input type="text" class="input-text"  name="p_model" value="{$vo['p_model']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">产品编号</td>
+						<td><input type="text" class="input-text"  name="p_sn" value="{$vo['p_sn']}" /></td>
+						</tr>						
+      				</table>
+      			</td>
+      			<td>
+      				<table>
+      					<tr>
+						<td width="120">产品规格</td>
+						<td><input type="text" class="input-text"  name="p_format" value="{$vo['p_format']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">产品种类</td>
+						<td><input type="text" class="input-text"  name="p_type" value="{$vo['p_type']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">包装类型</td>
+						<td><input type="text" class="input-text"  name="bale_mode" value="{$vo['bale_mode']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">订单数量</td>
+						<td><input type="text" class="input-text"  name="p_number" value="{$vo['p_number']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">入库数</td>
+						<td><input type="text" class="input-text"  name="enter_number" value="{$vo['enter_number']}" /></td>
+						</tr>
+						<tr>
+						<td width="120">备注</td>
+						<td><textarea id="remark"  name="remark"  style="width:95%; height:50px">{$vo['remark']}</textarea></td>
+						</tr>
+      				</table>
+      			</td>
+      		</tr>
+		</table>
+    <input type="hidden" name="id" value="{$vo['id']}">
+    <input name="dosubmit" type="submit" value="1" class="hidden" id="dosubmit">
+  </form>
+</fieldset>

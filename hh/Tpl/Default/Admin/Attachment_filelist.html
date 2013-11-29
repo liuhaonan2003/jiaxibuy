@@ -1,0 +1,6 @@
+<div id="thumbnails1" ><ul class="attachment-list" style="padding:0;margin:0;">
+<volist name="list" id="vo" key="k">
+    <li><div id="attachment_{$vo[aid]}" class="img"><a href="javascript:void(0);" id="on_{$vo[aid]}" onclick="javascript:add_file(this,{$vo['aid']},{$vo['status']})"><div class="icon"></div><img src="{$vo['filepath']}" path="{$vo['filepath']}" alt="{$vo['filename']}" imgid="{$vo[aid]}" imgsize="{$vo[filesize]}" width=80></a></div></li>  		 
+</volist>
+</ul></div>
+<div id="pages" class="page">{$page}</div> 

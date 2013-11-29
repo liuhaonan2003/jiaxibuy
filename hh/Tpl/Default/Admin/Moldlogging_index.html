@@ -1,0 +1,108 @@
+<include file="Admin:header" />
+<script type="text/javascript" src="__PUBLIC__/js/artDialog.min.js"></script>
+<table  class="search_table" width="100%">
+	<tr>
+		<td class="search">
+			<form action="{:U($module_name.'/index')}" method="get">
+			<input type="hidden" name="g" value="{$Think.GROUP_NAME}" />
+			<input type="hidden" name="m" value="{$Think.MODULE_NAME}" />
+			<input type="hidden" name="a" value="{$Think.ACTION_NAME}" />	
+
+			<input id="title" type="text" class="input-text" name="keyword" value="{$Think.get.keyword}" />
+			<select name="searchtype">			
+			<option value="mf_id" <eq name="searchtype" value="mf_id">selected="selected"</eq>>模具编号</option>
+			<option value="receive" <eq name="searchtype" value='receive'>selected="selected"</eq>>领用人</option>
+			<option value="n_return" <eq name="searchtype" value='n_return'>selected="selected"</eq>>归还人</option>
+			</select>
+ 			发放性质：
+			<select name="gt_id">
+				<option value="0" <eq name="gt_id" value='0'>selected="selected"</eq>>请选择</option>
+				<volist name="granttype" id="vo" key="k">
+					<option value="{$vo['id']}" <eq name="gt_id" value="$vo['id']">selected="selected"</eq>>{$vo['title']}</option>
+				</volist>
+			</select>
+			发放地址：
+ 			<select name="ga_id">
+				<option value="0" <eq name="ga_id" value='0'>selected="selected"</eq>>请选择</option>
+				<volist name="grantaddress" id="vo" key="k">
+					<option value="{$vo['id']}" <eq name="ga_id" value="$vo['id']">selected="selected"</eq>>{$vo['address']}</option>
+				</volist>
+			</select>
+			未归还查询：
+ 			<select name="return_time">
+				<option value="0" <eq name="return_time" value='0'>selected="selected"</eq>>请选择</option>
+				<option value="1-10" <eq name="return_time" value='1-10'>selected="selected"</eq>>1-10天</option>
+				<option value="10-20" <eq name="return_time" value='10-20'>selected="selected"</eq>>10-20天</option>
+				<option value="20-30" <eq name="return_time" value='20-30'>selected="selected"</eq>>20-30天</option>
+				<option value="30-60" <eq name="return_time" value='30-60'>selected="selected"</eq>>1-2月</option>
+				<option value="60-90" <eq name="return_time" value='60-90'>selected="selected"</eq>>2-3月</option>
+				<option value="90" <eq name="return_time" value='90'>selected="selected"</eq>>3个月以上</option>
+				<option value="180" <eq name="return_time" value='180'>selected="selected"</eq>>半年以上</option>
+				<option value="360" <eq name="return_time" value='360'>selected="selected"</eq>>一年以上</option>
+			</select>
+ 			<select name="sort">
+				<option value="asc" <if condition="$sort =='asc'">selected="selected"</if>>{:L('order_by_asc')}</option>
+				<option value="desc" <if condition="$sort =='desc'">selected="selected"</if>>{:L('order_by_desc')}</option>
+			</select>
+
+			<select name="listRows">
+				<option value="10" <if condition="$listRows ==10">selected="selected"</if>>10{:L('listRows')}</option>
+				<option value="15" <if condition="$listRows ==15">selected="selected"</if>>15{:L('listRows')}</option>
+				<option value="20" <if condition="$listRows ==20">selected="selected"</if>>20{:L('listRows')}</option>
+				<option value="50" <if condition="$listRows ==50">selected="selected"</if>>50{:L('listRows')}</option>
+				<option value="100" <if condition="$listRows ==100">selected="selected"</if>>100{:L('listRows')}</option>
+			</select>
+			
+			<input type="hidden" id="menuid" name="menuid" value="{$_GET['menuid']}"/>
+			<input type="submit" value="{:L('chaxun')}"  class="button" />
+			<input type="reset" value="{:L('reset')}" class="button"  />
+			</form>
+		</td>		
+	</tr>
+</table>
+
+<div class="pad-lr-10">
+<form name="myform" id="myform" action="" method="post">
+<div class="table-list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+			<th width="10"><input type="checkbox"  id="check_box"  onclick="selectall('ids[]');" /></th>
+            <th width="20" align="left">模具编号</th>
+            <th width="20" align="left">模具线径</th>
+            <th width="20" align="left">发放性质</th>
+            <th width="20" align="left">发放地址</th>
+            <th width="10" align="left">发放时间</th>
+            <th width="20" align="left">消耗前次数</th>
+            <th width="20" align="left">当前消耗</th>
+            <th width="20" align="left">领用人</th>
+            <th width="20" align="left">归还时间</th>
+            <th width="20" align="left">归还人</th>
+            <!--<th width="20" align="left">备注</th>-->
+			<th width="20">操作</th>
+            </tr>
+        </thead>
+	<tbody>
+    <volist name="list" id="vo" key="k">
+	<tr> 
+	<td align="center"><input type="checkbox" name="ids[]" value="{$vo['id']}" /></td>
+	<td><a href="javascript:opendialog('{:U($module_name."/show?do=show&id=".$vo['id']."&isajax=1")}','修改记录',900,520);" style="color:red;">{$vo['mf_id']}</a></td>
+	<td>{$vo['m_od']}</td>
+	<td>{$vo['gt_id']}</td>
+	<td>{$vo['ga_id']}</td>
+	<td><if condition="$vo['ctime']!=0">{$vo['ctime']|date="Y-m-d",###}</if></td>
+	<td>{$vo['total']}</td>
+	<td>{$vo['consume']}</td>
+	<td>{$vo['receive']}</td>
+	<td><if condition="$vo['rtime']!=0">{$vo['rtime']|date="Y-m-d",###}</if></td>
+	<td>{$vo['n_return']}</td>
+	<!--<td>{$vo['remark']}</td>-->	
+	<td align="center"><a href="{:U($module_name.'/edit',array(id=>$vo['id']))}">{:L('edit')}</a>| <a href="javascript:confirm_delete('{:U($module_name.'/delete',array( 'id' => $vo['id']))}')">{:L('delete')}</a></td>  		
+	</tr>
+	</volist>
+	</tbody>
+    </table>  
+    <div class="btn"><input type="button" class="button" name="dosubmit" value="<?php echo L('delete')?>" onclick="myform.action='{:U($module_name.'/deleteall')}';return confirm_deleteall('myform')"/></div>  </div>
+</form>
+</div>
+<div id="pages" class="page">{$page}</div>

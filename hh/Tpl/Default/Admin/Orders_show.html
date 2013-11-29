@@ -1,0 +1,98 @@
+<link rel="stylesheet" type="text/css" href="./Public/Css/style.css" />
+<script language="JavaScript">
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+</script>
+<script type="text/javascript" src="./Public/Js/jquery.min.js"></script>
+<script type="text/javascript" src="./Public/Js/swfupload.js"></script>
+<fieldset>
+<form  id="myform" name="myform" action="{:U($module_name.'/show?do='.$do)}" method="post">
+    <table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                        <td width="120">录入日期</td>
+                        <td><input type="text" value="<php>if(!empty($vo['ctime'])&&$vo['ctime']>0){</php>{$vo['ctime']|date='Y-m-d H:i:s',###}<php>}else{</php>{$showtime=date("Y-m-d H:i:s")}<php>}</php>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="25" id="ctime" name="ctime" class="Wdate input-text  "></td>
+                        </tr>
+                        <tr>
+                        <td width="120">接单时间</td>
+                        <td><input type="text" class="input-text"  name="jd_time" value="{$vo['jd_time']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">原始交期</td>
+                        <td><input type="text" class="input-text" name="ys_time" value="{$vo['ys_time']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">业务员</td>
+                        <td><input type="text" class="input-text"  name="ywy" value="{$vo['ywy']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">交期</td>
+                        <td><input type="text" class="input-text"  name="jq" value="{$vo['jq']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">客户</td>
+                        <td><input type="text" class="input-text"  name="client" value="{$vo['client']}" /></td>
+                        </tr>                                               
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                        <td width="120">订单号</td>
+                        <td><input type="text" class="input-text"  name="orders_sn" value="{$vo['orders_sn']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">客户型号</td>
+                        <td><input type="text" class="input-text"  name="client_model" value="{$vo['client_model']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">产品规格</td>
+                        <td><input type="text" class="input-text"  name="format" value="{$vo['format']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">零件编号</td>
+                        <td><input type="text" class="input-text"  name="psn" value="{$vo['psn']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">线材编号</td>
+                        <td><input type="text" class="input-text"  name="xsn" value="{$vo['xsn']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">订单数量</td>
+                        <td><input type="text" class="input-text"  name="orders_number" value="{$vo['orders_number']}" /></td>
+                        </tr>               
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                        <td width="120">长度</td>
+                        <td><input type="text" class="input-text"  name="p_length" value="{$vo['p_length']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">包装类型</td>
+                        <td><input type="text" class="input-text"  name="bale_mode" value="{$vo['bale_mode']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">和宏编号</td>
+                        <td><input type="text" class="input-text"  name="sn" value="{$vo['sn']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">和宏编号2</td>
+                        <td><input type="text" class="input-text"  name="sn1" value="{$vo['sn2']}" /></td>
+                        </tr>
+                        <tr>
+                        <td width="120">备注</td>
+                        <td><textarea id="remark"  name="remark"  style="width:95%; height:50px">{$vo['remark']}</textarea></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    <input type="hidden" name="id" value="{$vo['id']}">
+    <input name="dosubmit" type="submit" value="1" class="hidden" id="dosubmit">
+  </form>
+</fieldset>

@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+#bd .main {width:715px;float:right;}
+
+#bd .main .field {
+	margin-bottom:20px;
+}
+
+#bd .main .field .news_lst {
+	padding-bottom:10px;
+}
+#bd .main .field .news_lst h2 {
+	padding:0 20px 5px 0;
+	position:relative;
+}
+#bd .main .field .news_lst h2 span {
+	font-size:14px;
+	font-weight:bold;
+	color:black;
+}
+#bd .main .field .news_lst h2 em {
+    position:absolute;
+	right:40px;
+	float:right;
+	color:#999;
+}
+#bd .main .field .news_lst p {
+    color:#666;
+}
+#bd .main .nav {
+	margin-top:30px;
+}
+#bd .main .nav ul li{
+	display:inline;
+	float:left;
+	margin:0 3px;
+}

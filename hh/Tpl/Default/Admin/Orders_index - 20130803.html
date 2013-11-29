@@ -1,0 +1,138 @@
+<include file="Admin:header" />
+<table  class="search_table" width="100%">
+	<tr>
+		<td class="search">
+			<form id="mysearch" action="" method="get">
+			<input type="hidden" name="g" value="{$Think.GROUP_NAME}" />
+			<input type="hidden" name="m" value="{$Think.MODULE_NAME}" />
+			<input type="hidden" name="a" value="{$Think.ACTION_NAME}" />	
+
+			<input id="title" type="text" class="input-text" name="keyword" value="{$Think.get.keyword}" />
+			<select name="searchtype">			
+			<option value="sn" <eq name="searchtype" value="sn">selected="selected"</eq>>订单号</option>
+			<option value="p_sn" <eq name="searchtype" value='p_sn'>selected="selected"</eq>>成品编号</option>
+			<option value="c_sn" <eq name="searchtype" value='c_sn'>selected="selected"</eq>>客户编号/名称</option>
+			<option value="p_model" <eq name="searchtype" value='p_model'>selected="selected"</eq>>客户型号</option>
+			</select>
+			
+			出货日期：
+            <select name="complete_time">
+                <option value="0" <eq name="complete_time" value='0'>selected="selected"</eq>>请选择</option>
+                <volist name="arr_complete_time" id="vo" key="k">
+                    <option value="{$vo['complete_time']}" <eq name="complete_time" value="$vo['complete_time']">selected="selected"</eq>>{$vo['title']}</option>
+                </volist>
+            </select>
+ 
+ 			<select name="sort">
+				<option value="asc" <if condition="$sort =='asc'">selected="selected"</if>>{:L('order_by_asc')}</option>
+				<option value="desc" <if condition="$sort =='desc'">selected="selected"</if>>{:L('order_by_desc')}</option>
+			</select>
+
+			<select name="listRows">
+				<option value="10" <if condition="$listRows ==10">selected="selected"</if>>10{:L('listRows')}</option>
+				<option value="15" <if condition="$listRows ==15">selected="selected"</if>>15{:L('listRows')}</option>
+				<option value="20" <if condition="$listRows ==20">selected="selected"</if>>20{:L('listRows')}</option>
+				<option value="50" <if condition="$listRows ==50">selected="selected"</if>>50{:L('listRows')}</option>
+				<option value="100" <if condition="$listRows ==100">selected="selected"</if>>100{:L('listRows')}</option>
+			</select>
+			
+			<input type="hidden" id="menuid" name="menuid" value="{$_GET['menuid']}"/>
+			<input type="button" value="{:L('chaxun')}"  class="button" onclick="mysearch.action='{:U($module_name.'/index')}';return search('mysearch')"/>
+			<input type="reset" value="{:L('reset')}" class="button" />
+			清除所选日期的订单：
+            <select name="del_time" id="del_time">
+                <option value="0" <eq name="del_time" value='0'>selected="selected"</eq>>请选择</option>
+                <volist name="arr_ctime" id="vo" key="k">
+                    <option value="{$vo['ctime']}" <eq name="del_time" value="$vo['ctime']">selected="selected"</eq>>{$vo['title']}</option>
+                </volist>
+            </select>
+            <input type="button" value="{:L('清除完成订单')}"  class="button" onclick="return confirm_deldata('del_time','mysearch')"/>
+			</form>			
+		</td>		
+	</tr>
+</table>
+
+<div class="pad-lr-10">
+<form name="myform" id="myform" action="" method="post">
+<div class="table-list">
+    <table width="100%" cellspacing="0">
+        <thead>        	
+            <tr>
+			<th width="5"><input type="checkbox"  id="check_box"  onclick="selectall('ids[]');" /><!--ID--></th>
+            <!--<th width="20" align="left">录入时间</th>
+            <th width="20" align="left">月上线计划</th>
+            <th width="20" align="left">日上线计划</th>
+            <th width="20" align="left">增加时间</th>
+            <th width="20" align="left">扎线班</th>
+            <th width="20" align="left">包装班</th>-->
+            <th width="20" align="left">出货日期</th>
+            <!--<th width="20" align="left">出/验</th>-->
+            <th width="20" align="left">客户</th>
+            <th width="20" align="left">订单号</th>
+            <th width="20" align="left">SAP号</th>
+            <!--<th width="20" align="left">po#/日期贴</th>-->
+            <th width="20" align="left">客户型号</th>
+            <th width="20" align="left">产品编号</th>
+            <!--<th width="20" align="left">产品规格</th>
+            <th width="20" align="left">产品种类</th>
+            <th width="20" align="left">包装类型</th>-->
+            <th width="20" align="left">订单数量</th>
+            <!--<th width="20" align="left">入库数</th>-->
+			<th width="20">操作</th>
+            </tr>
+        </thead>
+	<tbody>
+    <volist name="list" id="vo" key="k">
+    <tr> 
+	<td align="center"><input type="checkbox" name="ids[]" value="{$vo['id']}" /><!--<a href="javascript:opendialog('{:U($module_name."/show?do=show&id=".$vo['id']."&isajax=1")}','查看订单详细',900,520);" style="color:red;">{$vo['id']}</a>--></td>
+	<!--<td><if condition="$vo['ctime']!=0">{$vo['ctime']|date="Y-m-d",###}</if></td>
+	<td>{$vo['month_plan']}</td>
+	<td>{$vo['day_plan']}</td>
+	<td>{$vo['add_date']}</td>
+	<td>{$vo['z_team']}</td>
+	<td>{$vo['b_team']}</td>-->
+	<td>{$vo['complete_time']}</td>
+	<!--<td>{$vo['pass']}</td>-->
+	<td>{$vo['c_sn']}</td>
+	<td>{$vo['sn']}</td>
+	<td>{$vo['sap']}</td>
+	<!--<td>{$vo['po_date']}</td>-->
+	<td>{$vo['p_model']}</td>
+	<td><a href="{:U($module_name.'/gorelation',array('p_sn'=>$vo['p_sn'],'ordersid'=>$vo['id']))}" style="color:red;">{$vo['p_sn']}</a></td>
+	<!--<td>{$vo['p_format']}</td>
+	<td>{$vo['p_type']}</td>
+	<td>{$vo['bale_mode']}</td>-->
+	<td>{$vo['p_number']}</td>
+	<!--<td>{$vo['enter_number']}</td>-->
+	<td align="center"><a href="{:U($module_name.'/edit',array(id=>$vo['id']))}">{:L('edit')}</a>| <a href="javascript:confirm_delete('{:U($module_name.'/delete',array( 'id' => $vo['id']))}')">{:L('delete')}</a></td>  		
+	</tr>
+	</volist>
+	</tbody>
+    </table>  
+    <div class="btn"><input type="button" class="button" name="dosubmit" value="<?php echo L('delete')?>" onclick="myform.action='{:U($module_name.'/deleteall')}';return confirm_deleteall('myform')"/></div>  </div>
+</form>
+</div>
+<div id="pages" class="page">{$page}</div>
+<script  type="text/javascript">
+function confirm_deldata(id,my){
+    art.dialog.confirm("{:L('确定要删除当前日期的订单吗？')}", function(){ ajax_submit(id,my);});
+}
+function ajax_submit(del_time,my){
+    var d_time=$('#'+del_time).val();
+    var url="{:U($module_name.'/delorders')}";
+     $.ajax({
+        type: "POST",
+        url:url,
+        data: {d_time:d_time},
+        dataType: "json",
+        success:function(data){
+            if(data.status==1){
+                $('#'+my).submit();
+                //alert(data.msg);
+            }else{
+                alert(data.msg);
+            }
+        }
+    });
+}
+</script>
